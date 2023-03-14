@@ -10,7 +10,7 @@ RUN npm install --only=production
 COPY . .
 
 # Typescript Build
-RUN npm run build
+RUN npx tsc
 
 # Run the app
 CMD [ "npm", "start" ]
