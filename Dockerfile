@@ -5,12 +5,12 @@ WORKDIR /usr/app
 COPY package*.json ./
 
 # install dependencies
-RUN npm install --only=production && npm cache clean --force && npm install -g typescript
+RUN npm install --only=production && npm install -g typescript
 
 COPY . .
 
 # Typescript Build
-RUN npm run build
+RUN npx tsc
 
 # Run the app
 CMD [ "npm", "start" ]
