@@ -1,0 +1,29 @@
+{
+  "name": "telegrambilgiyarismabot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.10.0",
+    "node-telegram-bot-api": "^0.61.0",
+    "redis": "^4.6.5",
+    "telegraf": "^4.11.2"
+  },
+  "devDependencies": {
+    "@types/connect-redis": "^0.0.20",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^18.14.0",
+    "@types/node-telegram-bot-api": "^0.61.2",
+    "@types/redis": "^4.0.11",
+    "typescript": "^4.9.5"
+  }
+}
