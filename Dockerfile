@@ -5,7 +5,7 @@ WORKDIR /usr/app
 COPY . .
 
 # install dependencies
-RUN npm install -g typescript && npm install --only=production
+RUN npm install --only=production && npm install -g typescript --force
 
 RUN tsc --version
 
