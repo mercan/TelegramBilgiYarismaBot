@@ -7,7 +7,8 @@ WORKDIR /usr/app
 COPY package.json .
 
 # install dependencies
-RUN npm install --only=production && npm install -g typescript
+RUN npm install\
+        && npm install typescript -g
 
 # Copy the source code
 COPY . .
