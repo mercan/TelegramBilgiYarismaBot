@@ -16,7 +16,8 @@
     "mongoose": "^6.10.0",
     "node-telegram-bot-api": "^0.61.0",
     "redis": "^4.6.5",
-    "telegraf": "^4.11.2"
+    "telegraf": "^4.11.2",
+    "tsc": "^2.0.4"
   },
   "devDependencies": {
     "@types/connect-redis": "^0.0.20",
