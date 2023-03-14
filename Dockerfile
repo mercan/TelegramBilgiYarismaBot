@@ -7,6 +7,8 @@ COPY . .
 # install dependencies
 RUN npm install -g typescript && npm install --only=production
 
+RUN tsc --version
+
 # Typescript Build
 RUN npm run build
 
