@@ -5,7 +5,7 @@
   "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "build": "npx tsc",
+    "build": "tsc",
     "start": "node dist/app.js"
   },
   "keywords": [],
