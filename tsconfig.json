@@ -9,6 +9,8 @@
     "lib": ["es2021"],
     "skipLibCheck": true,
     //"rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist",
+    //"noImplicitAny": true,
+    "allowJs": true
   }
 }
