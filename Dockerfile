@@ -2,15 +2,13 @@ FROM node:19.5.0-alpine
 
 WORKDIR /usr/app
 
-COPY package*.json ./
+COPY . .
 
 # install dependencies
 RUN npm install -g typescript && npm install --only=production
 
-COPY . .
-
 # Typescript Build
-RUN npx tsc
+RUN npm run build
 
 # Run the app
 CMD [ "npm", "start" ]
