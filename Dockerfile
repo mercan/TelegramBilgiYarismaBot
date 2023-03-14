@@ -1,16 +1,19 @@
 FROM node:19.5.0-alpine
 
+# Create app directory
 WORKDIR /usr/app
 
-COPY . .
+# Copy the package.json file
+COPY package.json .
 
 # install dependencies
-RUN npm install --only=production && npm install -g typescript --force
+RUN npm install --only=production && npm install -g typescript
 
-RUN tsc --version
+# Copy the source code
+COPY . .
 
 # Typescript Build
-RUN npm run build
+RUN tsc
 
 # Run the app
 CMD [ "npm", "start" ]
