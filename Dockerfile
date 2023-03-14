@@ -5,7 +5,7 @@ WORKDIR /usr/app
 COPY package*.json ./
 
 # install dependencies
-RUN npm install --only=production && npm install -g tsc && npm install -g typescript
+RUN npm install -g typescript && npm install --only=production
 
 COPY . .
 
