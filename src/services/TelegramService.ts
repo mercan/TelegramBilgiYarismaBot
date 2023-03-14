@@ -7,7 +7,7 @@ class TelegramService {
   constructor(token: string) {
     this.bot = new TelegramBot(token, { polling: true });
 
-    this.bot.on("polling_error", (error) => {
+    this.bot.on("polling_error", (error: Error) => {
       throw error;
     });
 
