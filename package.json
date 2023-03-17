@@ -2,10 +2,10 @@
   "name": "telegrambilgiyarismabot",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "dist/app.js",
   "type": "commonjs",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p .",
     "start": "node dist/app.js"
   },
   "keywords": [],

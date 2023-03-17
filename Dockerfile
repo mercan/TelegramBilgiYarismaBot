@@ -1,4 +1,4 @@
-FROM node:19-alpine AS builder
+FROM node:19-alpine
 
 # Create app directory
 WORKDIR /usr/app
@@ -7,14 +7,13 @@ WORKDIR /usr/app
 COPY package.json .
 
 # install dependencies
-RUN npm install\
-        && npm install typescript -g
+RUN npm install --only=production && npm install -g typescript
 
 # Copy the source code
 COPY . .
 
 # Typescript Build
-RUN tsc
+RUN npm run build
 
 # Run the app
 CMD [ "npm", "start" ]
