@@ -64,4 +64,14 @@ export default async (msg: TelegramBot.Message): Promise<void> => {
       open_period
     );
   }
+
+  TelegramService.sendMessage(
+    chatId,
+    "Bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+  );
+
+  TelegramService.sendMessage(
+    851852076, // Bot Developer Telegram ID
+    `Soru gönderilemedi. Chat ID: ${chatId}, Chat Username: ${msg.chat.username}, Chat Type: ${msg.chat.type}`
+  );
 };

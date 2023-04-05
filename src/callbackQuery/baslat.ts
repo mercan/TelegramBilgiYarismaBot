@@ -122,11 +122,31 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
     return;
   }
 
-  const message =
-    "Tebrikler! Doğru cevap verdiniz. 🎉\n\nYeni soru yükleniyor...";
+  const reactionMessages = [
+    "Tebrikler!",
+    "Harika!",
+    "Harikasın!",
+    "Mükemmel!",
+    "Çok iyi!",
+    "Çok iyisin!",
+    "Böyle devam!",
+    "Böyle devam et!",
+  ];
+  let message: string =
+    reactionMessages[Math.floor(Math.random() * reactionMessages.length)] + " ";
+
+  if (difficulty == 2) {
+    message +=
+      "2. soru barajını geçtiniz. Geriye 10 soru kaldı. 🎉\n\nYeni soru yükleniyor...";
+  } else if (difficulty == 7) {
+    message +=
+      "7. soru barajını geçtiniz. Geriye 5 soru kaldı. 🎉\n\nYeni soru yükleniyor...";
+  } else {
+    message += "Doğru cevap verdiniz. 🎉\n\nYeni soru yükleniyor...";
+  }
 
   TelegramService.sendMessage(chatId, message, sendMessageOptions);
-  await delay(2000);
+  await delay(1500); // Wait for message to be sent. 1.5 seconds.
 
   const newDifficulty: number = difficulty + 1;
   const nextQuestion = await QuestionService.getQuestionByDifficulty(
@@ -156,7 +176,6 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
   ];
 
   let open_period: number = 0;
-
   if (newDifficulty === 2 || newDifficulty === 3) {
     open_period = 40;
   } else if (newDifficulty === 4 || newDifficulty === 5) {

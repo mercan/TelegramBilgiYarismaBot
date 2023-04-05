@@ -14,12 +14,6 @@ Bilgi Yarışmasını başlatmak için /baslat komutunu kullanabilirsin.
 <b>Bol şans ve iyi eğlenceler! 🎉🎉🎉</b>
 `;
 
-  console.table({
-    "Chat ID": chatId,
-    "First Name": msg.from?.first_name,
-    Username: msg.from?.username,
-  });
-
   TelegramService.sendMessage(chatId, message, {
     parse_mode: "HTML",
     reply_markup: {
