@@ -129,6 +129,11 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
     "Mükemmel!",
     "Çok iyi!",
     "Çok iyisin!",
+    "Güzel!",
+    "Çok güzel!",
+    "Tutturdun!",
+    "Etkileyici!",
+    "Etkileyicisin!",
     "Böyle devam!",
     "Böyle devam et!",
   ];

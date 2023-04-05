@@ -63,6 +63,8 @@ export default async (msg: TelegramBot.Message): Promise<void> => {
       },
       open_period
     );
+
+    return;
   }
 
   TelegramService.sendMessage(

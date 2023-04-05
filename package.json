@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "build": "tsc -p .",
-    "start": "node dist/app.js"
+    "start": "npm run build && node dist/app.js"
   },
   "keywords": [],
   "author": "",
