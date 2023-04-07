@@ -8,6 +8,8 @@ Merhaba <b>${msg.from?.first_name}</b>! Bilgi Yarışmasına Hoşgeldin! 🎉 �
 
 Bilgi Yarışması toplamda 12 sorudan oluşuyor. Her soru için bir cevap vermeniz gerekiyor. Doğru cevap verirseniz bir sonraki soruya geçebilirsiniz. Ancak yanlış cevap verirseniz, oyununuz baştan başlayacaktır. Tüm 12 soruyu doğru yanıtlarsanız, oyunu tamamlamış olursunuz.
 
+Soruların süreli olduğunu da hatırlatalım. Cevap vermek için belirli bir süreniz olacak ve süre içinde cevap vermezseniz maalesef kaybedeceksiniz.
+
 Bilgi Yarışmasını başlatmak için /baslat komutunu kullanabilirsin.
 İstatistiklerini görmek için /istatistik komutunu kullanabilirsin..
 
