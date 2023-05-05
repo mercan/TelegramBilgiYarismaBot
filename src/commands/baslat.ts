@@ -3,10 +3,6 @@ import QuestionService from "../services/QuestionService";
 import RedisService from "../services/RedisService";
 import TelegramService from "../services/TelegramService";
 
-/**
- * Sends a question with multiple-choice answers to a Telegram chat.
- * @param msg - The Telegram message object representing the chat.
- */
 export default async (msg: TelegramBot.Message): Promise<void> => {
   const chatId: number = msg.chat.id;
   const difficulty: number = 1;
