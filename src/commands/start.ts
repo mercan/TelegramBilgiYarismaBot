@@ -11,7 +11,7 @@ Bilgi Yarışması toplamda 12 sorudan oluşuyor. Her soru için bir cevap verme
 Soruların süreli olduğunu da hatırlatalım. Cevap vermek için belirli bir süreniz olacak ve süre içinde cevap vermezseniz maalesef kaybedeceksiniz.
 
 Bilgi Yarışmasını başlatmak için /baslat komutunu kullanabilirsin.
-İstatistiklerini görmek için /istatistik komutunu kullanabilirsin..
+İstatistiklerini görmek için /istatistik komutunu kullanabilirsin.
 
 <b>Bol şans ve iyi eğlenceler! 🎉🎉🎉</b>
 `;
