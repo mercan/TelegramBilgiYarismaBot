@@ -36,7 +36,6 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
   }
 
   const difficulty = question.difficulty;
-
   // Update statistic.
   const statistic = await StatisticService.getStatisticByUserId(chatId);
 
@@ -81,11 +80,11 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
 
   if (!isCorrectAnswer) {
     await delay(500);
-    const message = `Üzgünüm! Yanlış cevap verdiniz. 😔\n\nDoğru Cevap: <span class="tg-spoiler">${
+    const message = `Üzgünüm! Yanlış cevap verdiniz.\nDoğru Cevap: ${
       question.answers[question.correctAnswer]
-    }</span>`;
+    }`;
 
-    TelegramService.sendMessage(chatId, message, {
+    return TelegramService.sendMessage(chatId, message, {
       ...sendMessageOptions,
       reply_markup: {
         inline_keyboard: [
@@ -110,16 +109,11 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
         ],
       },
     });
-
-    return;
   }
 
   if (difficulty == 12) {
     const message = `Tebrikler! Tüm soruları doğru bildiniz. 🎉\n\nYeniden başlamak için /baslat yazabilirsiniz.`;
-
-    TelegramService.sendMessage(chatId, message, sendMessageOptions);
-
-    return;
+    return TelegramService.sendMessage(chatId, message, sendMessageOptions);
   }
 
   const reactionMessages = [
@@ -137,6 +131,7 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
     "Böyle devam!",
     "Böyle devam et!",
   ];
+
   let message: string =
     reactionMessages[Math.floor(Math.random() * reactionMessages.length)] + " ";
 
@@ -151,7 +146,7 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
   }
 
   TelegramService.sendMessage(chatId, message, sendMessageOptions);
-  await delay(1500); // Wait for message to be sent. 1.5 seconds.
+  await delay(1500);
 
   const newDifficulty: number = difficulty + 1;
   const nextQuestion = await QuestionService.getQuestionByDifficulty(
@@ -163,15 +158,22 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
   }
 
   const questionText = `${newDifficulty}/12 Soru\n\n${nextQuestion.question}`;
+  let new_correct_option_id: number = 0;
 
-  const new_correct_option_id =
-    nextQuestion.correctAnswer == "A"
-      ? 0
-      : nextQuestion.correctAnswer == "B"
-      ? 1
-      : nextQuestion.correctAnswer == "C"
-      ? 2
-      : 3;
+  switch (question.correctAnswer) {
+    case "A":
+      new_correct_option_id = 0;
+      break;
+    case "B":
+      new_correct_option_id = 1;
+      break;
+    case "C":
+      new_correct_option_id = 2;
+      break;
+    case "D":
+      new_correct_option_id = 3;
+      break;
+  }
 
   const pollChoices = [
     nextQuestion.answers["A"],
@@ -181,19 +183,29 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
   ];
 
   let open_period: number = 0;
-  if (newDifficulty === 2 || newDifficulty === 3) {
-    open_period = 40;
-  } else if (newDifficulty === 4 || newDifficulty === 5) {
-    open_period = 50;
-  } else if (newDifficulty === 6 || newDifficulty === 7) {
-    open_period = 60;
-  } else if (newDifficulty === 8 || newDifficulty === 9) {
-    open_period = 70;
-  } else {
-    open_period = 80;
+  switch (newDifficulty) {
+    case 4:
+    case 5:
+      open_period = 30;
+      break;
+
+    case 6:
+    case 7:
+      open_period = 40;
+      break;
+
+    case 8:
+    case 9:
+    case 10:
+      open_period = 50;
+      break;
+
+    default:
+      open_period = 60;
+      break;
   }
 
-  const pollOptions: TelegramBot.SendPollOptions = {
+  const options: TelegramBot.SendPollOptions = {
     type: "quiz",
     is_anonymous: false,
     correct_option_id: new_correct_option_id,
@@ -205,13 +217,11 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
     chatId,
     questionText,
     pollChoices,
-    pollOptions
+    options
   );
 
   if (!poll || !poll.poll) {
-    console.log("Poll could not be sent.", poll);
-
-    return;
+    return console.log("Poll could not be sent.", poll);
   }
 
   RedisService.setQuiz(

@@ -6,21 +6,27 @@ import TelegramService from "../services/TelegramService";
 export default async (msg: TelegramBot.Message): Promise<void> => {
   const chatId: number = msg.chat.id;
   const difficulty: number = 1;
-
   const question = await QuestionService.getQuestionByDifficulty(difficulty);
 
   if (question) {
     const questionText = `${difficulty}/12 Soru\n\n${question.question}`;
-    const open_period = 30;
+    const open_period = 20;
+    let correct_option_id: number = 0;
 
-    const correct_option_id =
-      question.correctAnswer == "A"
-        ? 0
-        : question.correctAnswer == "B"
-        ? 1
-        : question.correctAnswer == "C"
-        ? 2
-        : 3;
+    switch (question.correctAnswer) {
+      case "A":
+        correct_option_id = 0;
+        break;
+      case "B":
+        correct_option_id = 1;
+        break;
+      case "C":
+        correct_option_id = 2;
+        break;
+      case "D":
+        correct_option_id = 3;
+        break;
+    }
 
     const pollChoices = [
       question.answers["A"],
@@ -29,7 +35,7 @@ export default async (msg: TelegramBot.Message): Promise<void> => {
       question.answers["D"],
     ];
 
-    const pollOptions: TelegramBot.SendPollOptions = {
+    const options: TelegramBot.SendPollOptions = {
       type: "quiz",
       is_anonymous: false,
       correct_option_id: correct_option_id,
@@ -41,13 +47,11 @@ export default async (msg: TelegramBot.Message): Promise<void> => {
       chatId,
       questionText,
       pollChoices,
-      pollOptions
+      options
     );
 
     if (!poll || !poll.poll) {
-      console.log("Poll could not be sent.", poll);
-
-      return;
+      return console.log("Poll could not be sent.", poll);
     }
 
     RedisService.setQuiz(

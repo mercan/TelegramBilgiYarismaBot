@@ -16,11 +16,15 @@ RedisService.connect();
 import startCommand from "./src/commands/start";
 import baslatCommand from "./src/commands/baslat";
 import istatistikCommand from "./src/commands/istatistik";
+import puanlamaMesajGonderCommand from "./src/commands/sendMessage";
 
 // Register commands
 TelegramService.onText(/^\/start/, startCommand);
 TelegramService.onText(/^\/baslat/, baslatCommand);
 TelegramService.onText(/^\/istatistik/, istatistikCommand);
+TelegramService.onText(/^\/baslat@bilgiyarismabot/, baslatCommand);
+TelegramService.onText(/^\/istatistik@bilgiyarismabot/, istatistikCommand);
+TelegramService.onText(/^\/puanlamaMesajGonder/, puanlamaMesajGonderCommand);
 
 // Callback queries
 TelegramService.callbackQuery((callback) => {
@@ -30,6 +34,10 @@ TelegramService.callbackQuery((callback) => {
 
   if (callback.data === "/istatistik") {
     istatistikCommand(callback.message as any);
+  }
+
+  if (callback.data === "/puanlamaMesajGonder") {
+    puanlamaMesajGonderCommand(callback.message as any);
   }
 
   return;

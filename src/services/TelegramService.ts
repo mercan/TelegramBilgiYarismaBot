@@ -27,10 +27,6 @@ class TelegramService {
     ]);
   }
 
-  public getUpdates(): Promise<TelegramBot.Update[]> {
-    return this.bot.getUpdates();
-  }
-
   public onText(
     pattern: RegExp,
     callback: (msg: TelegramBot.Message, match: RegExpExecArray | null) => void
@@ -50,28 +46,13 @@ class TelegramService {
     this.bot.deleteMessage(chatId, messageId);
   }
 
-  public editMessageText(
-    text: string,
-    options: TelegramBot.EditMessageTextOptions
-  ): void {
-    this.bot.editMessageText(text, options);
-  }
-
   public sendPoll(
     chatId: number,
     question: string,
-    options: string[],
-    optionsOptions?: TelegramBot.SendPollOptions
+    pollChoices: string[],
+    options?: TelegramBot.SendPollOptions
   ): Promise<TelegramBot.Message> {
-    return this.bot.sendPoll(chatId, question, options, optionsOptions);
-  }
-
-  public stopPoll(
-    chatId: number,
-    messageId: number,
-    options?: TelegramBot.StopPollOptions
-  ): Promise<TelegramBot.Poll> {
-    return this.bot.stopPoll(chatId, messageId, options);
+    return this.bot.sendPoll(chatId, question, pollChoices, options);
   }
 
   public pollCallback(callback: (poll: TelegramBot.PollAnswer) => void): void {
@@ -82,17 +63,6 @@ class TelegramService {
     callback: (query: TelegramBot.CallbackQuery) => void
   ): void {
     this.bot.on("callback_query", callback);
-  }
-
-  public answerCallbackQuery(
-    callbackQueryId: string,
-    options?: TelegramBot.AnswerCallbackQueryOptions
-  ): void {
-    this.bot.answerCallbackQuery(callbackQueryId, options);
-  }
-
-  public getChat(chatId: TelegramBot.ChatId): Promise<TelegramBot.Chat> {
-    return this.bot.getChat(chatId);
   }
 }
 
