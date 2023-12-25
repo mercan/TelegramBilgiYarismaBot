@@ -102,6 +102,12 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
           ],
           [
             {
+              text: "Botu Puanla",
+              url: "https://t.me/dailychannelsbot?start=bilgiyarismabot",
+            },
+          ],
+          [
+            {
               text: "📢 Kanala Katıl 📢",
               url: "https://t.me/+FFSdrLh-kMAwZThk",
             },

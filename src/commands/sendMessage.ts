@@ -3,10 +3,9 @@ import TelegramService from "../services/TelegramService";
 import StatisticService from "../services/StatisticService";
 
 export default async (msg: Message): Promise<void> => {
-  const chatId = msg.chat.id;
   const users = await StatisticService.getUsersWith30OrMoreAnswerCount();
 
-  for (const user of users) {
+  for await (const user of users) {
     const message = `
 Merhaba!
 
@@ -20,7 +19,7 @@ Teşekkürler. 🤗
 <b>Bol şans ve iyi eğlenceler! 🎉🎉🎉</b>
 `;
 
-    await TelegramService.sendMessage(chatId, message, {
+    await TelegramService.sendMessage(user.userId, message, {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [

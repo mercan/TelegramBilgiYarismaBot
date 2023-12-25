@@ -57,7 +57,6 @@ const onExpired = async (channel: string, message: string) => {
   if (prefix === shadowPrefix) return;
 
   const quiz = await RedisService.getShadowQuiz(quizId);
-
   if (!quiz) {
     return;
   }

@@ -22,6 +22,12 @@ export default async (msg: TelegramBot.Message): Promise<void> => {
                 callback_data: "/baslat",
               },
             ],
+            [
+              {
+                text: "Botu Puanla",
+                url: "https://t.me/dailychannelsbot?start=bilgiyarismabot",
+              },
+            ],
           ],
         },
       }
