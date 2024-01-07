@@ -166,7 +166,7 @@ export default async (pollCallback: TelegramBot.PollAnswer) => {
   const questionText = `${newDifficulty}/12 Soru\n\n${nextQuestion.question}`;
   let new_correct_option_id: number = 0;
 
-  switch (question.correctAnswer) {
+  switch (nextQuestion.correctAnswer) {
     case "A":
       new_correct_option_id = 0;
       break;
