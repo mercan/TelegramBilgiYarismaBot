@@ -29,6 +29,12 @@ Teşekkürler. 🤗
               url: "https://t.me/dailychannelsbot?start=bilgiyarismabot",
             },
           ],
+          [
+            {
+              text: "Oyuna Başla",
+              callback_data: "/baslat",
+            },
+          ],
         ],
       },
     });
