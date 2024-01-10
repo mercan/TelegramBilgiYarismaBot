@@ -6,37 +6,42 @@ export default async (msg: Message): Promise<void> => {
   const users = await StatisticService.getUsersWith30OrMoreAnswerCount();
 
   for await (const user of users) {
-    const message = `
+    try {
+      const message = `
 Merhaba!
 
 Şu ana kadar ${await StatisticService.getUserTotalQuestionCount(
-      user.userId as number
-    )} soru çözdün. 🤓
-Bizce bu bizi puanlaman için yeterli. 🤩
-Bizi puanlamak için <b>👇👇👇</b> butonuna tıkla. 🙏
-Teşekkürler. 🤗
+        user.userId as number
+      )} soru çözdün.
+Bizce bu bizi puanlaman için yeterli.
 
-<b>Bol şans ve iyi eğlenceler! 🎉🎉🎉</b>
+Bizi puanlamak için aşağıdaki butonuna tıkla. 🙏
+Teşekkürler. 
+
+<b>Bol şans ve iyi eğlenceler! 🎉</b>
 `;
 
-    await TelegramService.sendMessage(user.userId, message, {
-      parse_mode: "HTML",
-      reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: "👉 Puanla 👈",
-              url: "https://t.me/dailychannelsbot?start=bilgiyarismabot",
-            },
+      await TelegramService.sendMessage(user.userId, message, {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: "👉 Puanla 👈",
+                url: "https://t.me/dailychannelsbot?start=bilgiyarismabot",
+              },
+            ],
+            [
+              {
+                text: "Oyuna Başla",
+                callback_data: "/baslat",
+              },
+            ],
           ],
-          [
-            {
-              text: "Oyuna Başla",
-              callback_data: "/baslat",
-            },
-          ],
-        ],
-      },
-    });
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
