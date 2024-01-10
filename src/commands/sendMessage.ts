@@ -9,7 +9,7 @@ export default async (msg: Message): Promise<void> => {
     const message = `
 Merhaba!
 
-Şu ana kadar ${StatisticService.getUserTotalQuestionCount(
+Şu ana kadar ${await StatisticService.getUserTotalQuestionCount(
       user.userId as number
     )} soru çözdün. 🤓
 Bizce bu bizi puanlaman için yeterli. 🤩
