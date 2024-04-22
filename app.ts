@@ -80,7 +80,6 @@ const onExpired = async (channel: string, message: string) => {
 
 // Redis expired key event
 RedisService.onQuizExpired(onExpired);
-
 import express from "express";
 
 const app = express();
